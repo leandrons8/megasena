@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mega Sena</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <nav class="navbar sticky-top bg-body-tertiary">
+      <div class="container">
+        <a class="navbar-brand" href="#">Mega Sena</a>
+      </div>
+    </nav>
+    <div class="container" id="games">
+      <div class="row py-3 align-items-center">
+        <div class="col-auto">
+          <div class="input-group" id="drawn">
+            <span class="input-group-text">Insira os números sorteados: </span>
+            <input type="number" min="1" max="60" onchange="updateDrawn()" placeholder="#1">
+            <input type="number" min="1" max="60" onchange="updateDrawn()" placeholder="#2">
+            <input type="number" min="1" max="60" onchange="updateDrawn()" placeholder="#3">
+            <input type="number" min="1" max="60" onchange="updateDrawn()" placeholder="#4">
+            <input type="number" min="1" max="60" onchange="updateDrawn()" placeholder="#5">
+            <input type="number" min="1" max="60" onchange="updateDrawn()" placeholder="#6">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto">
+          <div class="input-group">
+            <input placeholder="Nome do jogo" id="gameName">
+            <button class="btn btn-primary" onclick="addGame()">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="megasena.js"></script>
+  </body>
+</html>
