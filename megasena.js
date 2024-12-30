@@ -13,7 +13,10 @@ function updateScore(){
         let score = 0
         for (let j=2, maxj=game.length-2; j<maxj; j++){
             if (drawn.includes(game[j].children[0].innerText.trim())){
+                game[j].children[0].classList = "btn btn-success"
                 score++
+            } else {
+                game[j].children[0].classList = "btn btn-danger"
             }
         }
         game[0].children[0].classList = ((score>1) ? "bi bi-trophy" : "")
