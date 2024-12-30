@@ -19,7 +19,7 @@ function updateScore(){
                 game[j].children[0].classList = "btn btn-danger"
             }
         }
-        game[0].children[0].classList = ((score>1) ? "bi bi-trophy" : "")
+        game[0].children[0].classList = ((score==6) ? "bi bi-trophy" : "")
         game[1].children[0].innerText = score
     }
 }
