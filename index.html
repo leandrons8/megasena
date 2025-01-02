@@ -17,14 +17,14 @@
     <div class="container" id="games">
       <div class="row py-3 align-items-center">
         <div class="col-auto">
-          <div class="input-group" id="drawn">
+          <div class="input-group" id="drawn" onchange="updateDrawn()">
             <span class="input-group-text">Números sorteados: </span>
-            <input type="number" min="1" max="60" onchange="updateDrawn()" placeholder="#1">
-            <input type="number" min="1" max="60" onchange="updateDrawn()" placeholder="#2">
-            <input type="number" min="1" max="60" onchange="updateDrawn()" placeholder="#3">
-            <input type="number" min="1" max="60" onchange="updateDrawn()" placeholder="#4">
-            <input type="number" min="1" max="60" onchange="updateDrawn()" placeholder="#5">
-            <input type="number" min="1" max="60" onchange="updateDrawn()" placeholder="#6">
+            <input class="form-control" type="number" min="1" max="60" placeholder="#1">
+            <input class="form-control" type="number" min="1" max="60" placeholder="#2">
+            <input class="form-control" type="number" min="1" max="60" placeholder="#3">
+            <input class="form-control" type="number" min="1" max="60" placeholder="#4">
+            <input class="form-control" type="number" min="1" max="60" placeholder="#5">
+            <input class="form-control" type="number" min="1" max="60" placeholder="#6">
           </div>
         </div>
       </div>
