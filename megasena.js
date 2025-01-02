@@ -92,6 +92,7 @@ function createGame(name, numbers){
     score.classList = "badge text-bg-secondary"
     coladd.className = "col-auto"
     inputgroup.className = "input-group"
+    input.className = "form-control"
     add.classList = "btn btn-primary"
     icon.classList = "bi bi-plus-lg"
     colremove.className = "col-auto"
