@@ -30,7 +30,7 @@ function renderDrawn(){
     col.className = "col-auto"
 
     const inputGroup = document.createElement("div")
-    inputGroup.className  = "input-group"
+    inputGroup.className  = "input-group flex-nowrap"
     inputGroup.onchange = function (){
         const tbody = document.getElementById("tbody").children
         for (let i=0; i<tbody.length-1; i++){
@@ -212,7 +212,7 @@ function renderTableContent(){
 
 function renderInputGroup(name){
     const inputgroup = document.createElement("div")
-    inputgroup.className = "input-group"
+    inputgroup.className = "input-group flex-nowrap"
 
     for (let i=0; i<20; i++){
         const input = document.createElement("input")
