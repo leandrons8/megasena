@@ -1,14 +1,26 @@
 games = JSON.parse(window.localStorage.getItem("games"))
 if (typeof games != "object" || games == null){
     games = {}
-    window.localStorage.setItem("games", JSON.stringify(games))
+} else {
+    for (const game of Object.values(games)){
+        for (let i=0; i<game.length; i++){
+            const n = Number(game[i])
+            game[i] = ((n) ? n : null)
+        }
+    }
 }
+window.localStorage.setItem("games", JSON.stringify(games))
 
 drawn = JSON.parse(window.localStorage.getItem("drawn"))
 if (typeof drawn != "object" || drawn == null || drawn.length != 6){
     drawn = [null,null,null,null,null,null]
-    window.localStorage.setItem("drawn", JSON.stringify(drawn))
+} else {
+    for (let i=0; i<6; i++){
+        const n = Number(drawn[i])
+        drawn[i] = ((n) ? n : null)
+    }
 }
+window.localStorage.setItem("drawn", JSON.stringify(drawn))
 
 function renderDrawn(){
     const row = document.createElement("div")
@@ -36,6 +48,7 @@ function renderDrawn(){
 
     for (let i = 0; i < 6; i++){
         const input = document.createElement("input")
+        input.style = "width: 60px"
         input.className = "form-control"
         input.type = "number"
         input.min = 1
@@ -72,6 +85,7 @@ function renderTable(){
     const thead = document.createElement("thead")
 
     const tbody = document.createElement("tbody")
+    tbody.className = "text-center"
     tbody.id = "tbody"
 
     const tr = document.createElement("tr")
@@ -175,9 +189,6 @@ function renderTableRow(name){
         window.localStorage.setItem("games", JSON.stringify(games))
     }
 
-    // TODO: input numbers
-    // renderNs(inputgroup, games[name])
-
     tr.append(tdname, tdpts, tdnum, tdremove)
     tdname.append(inputname)
     tdnum.append(inputgroup)
@@ -205,6 +216,7 @@ function renderInputGroup(name){
 
     for (let i=0; i<20; i++){
         const input = document.createElement("input")
+        input.style = "width: 60px"
         input.type = "number"
         input.min = 1
         input.max = 60
