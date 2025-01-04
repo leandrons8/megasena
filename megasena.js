@@ -124,7 +124,7 @@ function renderBody(){
     const navcontainer = document.createElement("div")
     navcontainer.className = "container"
 
-    const navbrand = document.createElement("a")
+    const navbrand = document.createElement("span")
     navbrand.className = "navbar-brand"
     navbrand.innerText = "Mega Sena"
 
@@ -147,7 +147,9 @@ function renderTableRow(name){
     const tdname = document.createElement("td")
 
     const tdpts = document.createElement("td")
-    tdpts.innerText = 0
+
+    const iconpts = document.createElement("i")
+    iconpts.className = "bi bi-0-circle"
 
     const tdnum = document.createElement("td")
 
@@ -191,6 +193,7 @@ function renderTableRow(name){
 
     tr.append(tdname, tdpts, tdnum, tdremove)
     tdname.append(inputname)
+    tdpts.append(iconpts)
     tdnum.append(inputgroup)
     tdremove.append(remove)
 
@@ -282,7 +285,7 @@ function renderInputGroup(name){
 }
 
 function updateScore(tr){
-    const pts = tr.children[1]
+    const icon = tr.children[1].children[0]
     const inputgroup = tr.children[2].children[0].children
     
     let score = 0
@@ -296,7 +299,7 @@ function updateScore(tr){
             input.className = "form-control"
         }
     }
-    pts.innerText = score
+    icon.className = ((score==6) ? "bi bi-trophy" : "bi bi-"+score+"-circle")
 }
 
 renderBody()
