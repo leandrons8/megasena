@@ -137,7 +137,7 @@ function renderBody(){
 
     const modal = renderModal("modal", "Insira um nome válido")
     
-    body.append(nav, container)
+    body.append(nav, container, modal)
     nav.append(navcontainer)
     navcontainer.append(navbrand)
     container.append(rowDrawn, rowTable)
