@@ -134,6 +134,8 @@ function renderBody(){
     const rowDrawn = renderDrawn()
     
     const rowTable = renderTable()
+
+    const modal = renderModal("modal", "Insira um nome válido")
     
     body.append(nav, container)
     nav.append(navcontainer)
@@ -163,7 +165,8 @@ function renderTableRow(name){
     inputname.onchange = function (){
         if (Object.keys(games).includes(this.value) || !this.value){
             this.value = null
-            window.alert("Insira um nome válido")
+            const modal = new bootstrap.Modal("#modal")
+            modal.show()
         } else {
             games[this.value] = []
             window.localStorage.setItem("games", JSON.stringify(games))
@@ -282,6 +285,46 @@ function renderInputGroup(name){
     }
 
     return inputgroup
+}
+
+function renderModal(id, text){
+    const modal = document.createElement("div")
+    modal.className = "modal"
+    modal.tabIndex = "-1"
+    modal.id = id
+    
+    const dialog = document.createElement("div")
+    dialog.className = "modal-dialog"
+    
+    const content = document.createElement("div")
+    content.className = "modal-content"
+
+    const header = document.createElement("div")
+    header.className = "modal-header"
+
+    const title = document.createElement("h5")
+    title.className = "modal-title"
+    title.innerText = "Alert"
+
+    const close = document.createElement("button")
+    close.type = "button"
+    close.className = "btn-close"
+    close.dataset.bsDismiss="modal"
+    close.ariaLabel = "Close"
+
+    const body = document.createElement("div")
+    body.className = "modal-body"
+
+    const bodytext = document.createElement("p")
+    bodytext.innerText = text
+    
+    modal.append(dialog)
+    dialog.append(content)
+    content.append(header, body)
+    header.append(title, close)
+    body.append(bodytext)
+
+    return modal
 }
 
 function updateScore(tr){
