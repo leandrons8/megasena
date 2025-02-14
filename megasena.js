@@ -22,40 +22,18 @@ if (typeof drawn != "object" || drawn == null || drawn.length != 6){
 }
 window.localStorage.setItem("drawn", JSON.stringify(drawn))
 
-function renderDrawn(){
-    const row = document.createElement("div")
-    row.className = "row py-3"
-
-    const col = document.createElement("div")
-    col.className = "col-auto"
-
-    const inputGroup = document.createElement("div")
-    inputGroup.className  = "input-group flex-nowrap"
-    inputGroup.onchange = function (){
+function loadPage(){
+    const drawnGroup = document.getElementById("drawn")
+    drawnGroup.onchange = function (){
         const tbody = document.getElementById("tbody").children
         for (let i=0; i<tbody.length-1; i++){
             updateScore(tbody[i])
         }
     }
-
-    const inputGroupText = document.createElement("span")
-    inputGroupText.className = "input-group-text"
-    inputGroupText.innerText = "Números sorteados:"
-
-    row.append(col)
-    col.append(inputGroup)
-    inputGroup.append(inputGroupText)
-
     for (let i = 0; i < 6; i++){
-        const input = document.createElement("input")
-        input.style = "width: 60px"
-        input.className = "form-control"
-        input.type = "number"
-        input.min = 1
-        input.max = 60
-        input.value = drawn[i]
-        input.placeholder = "#"+(i+1)
-        input.onchange = function (){
+        const drawnElement = drawnGroup.children[i+1]
+        drawnElement.value = drawn[i]
+        drawnElement.onchange = function (){
             let n = Number(this.value)
             drawn[i] = null
             while (drawn.includes(n) && 1<=n && n<=60){
@@ -65,82 +43,16 @@ function renderDrawn(){
             this.value = drawn[i]
             window.localStorage.setItem("drawn", JSON.stringify(drawn))
         }
-
-        inputGroup.append(input)
     }
 
-    return row
-}
-
-function renderTable(){
-    const row = document.createElement("div")
-    row.className = "row py-3"
-    
-    const col = document.createElement("div")
-    col.className = "col-auto"
-
-    const table = document.createElement("table")
-    table.className = "table align-middle"
-
-    const thead = document.createElement("thead")
-
-    const tbody = document.createElement("tbody")
-    tbody.className = "text-center"
-    tbody.id = "tbody"
-
-    const tr = document.createElement("tr")
-    
-    const name = document.createElement("th")
-    name.innerText = "Nome do jogo"
-    name.scope = "col"
-    
-    const pts = document.createElement("th")
-    pts.innerText = "Pontuação"
-    pts.scope = "col"
-    
-    const num = document.createElement("th")
-    num.innerText = "Números"
-    num.scope = "col"
-    
-    const remove = document.createElement("th")
-    remove.innerText = "Remover"
-    remove.scope = "col"
-
-    row.append(col)
-    col.append(table)
-    table.append(thead, tbody)
-    thead.append(tr)
-    tr.append(name, pts, num, remove)
-
-    return row
-}
-
-function renderBody(){
-    const body = document.body
-
-    const nav = document.createElement("nav")
-    nav.className = "navbar sticky-top bg-body-tertiary"
-
-    const navcontainer = document.createElement("div")
-    navcontainer.className = "container"
-
-    const navbrand = document.createElement("span")
-    navbrand.className = "navbar-brand"
-    navbrand.innerText = "Mega Sena"
-
-    const container = document.createElement("div")
-    container.className = "container"
-    
-    const rowDrawn = renderDrawn()
-    
-    const rowTable = renderTable()
-
-    const modal = renderModal("modal", "Insira um nome válido")
-    
-    body.append(nav, container, modal)
-    nav.append(navcontainer)
-    navcontainer.append(navbrand)
-    container.append(rowDrawn, rowTable)
+    const tbody = document.getElementById("tbody")
+    for (const name of Object.keys(games)){
+        const tr = renderTableRow(name)
+        updateScore(tr)
+        tbody.append(tr)
+    }
+    const tr = renderTableRow()
+    tbody.append(tr)
 }
 
 function renderTableRow(name){
@@ -201,19 +113,6 @@ function renderTableRow(name){
     tdremove.append(remove)
 
     return tr
-}
-
-function renderTableContent(){
-    const tbody = document.getElementById("tbody")
-
-    for (const name of Object.keys(games)){
-        const tr = renderTableRow(name)
-        updateScore(tr)
-        tbody.append(tr)
-    }
-
-    const tr = renderTableRow()
-    tbody.append(tr)
 }
 
 function renderInputGroup(name){
@@ -287,46 +186,6 @@ function renderInputGroup(name){
     return inputgroup
 }
 
-function renderModal(id, text){
-    const modal = document.createElement("div")
-    modal.className = "modal"
-    modal.tabIndex = "-1"
-    modal.id = id
-    
-    const dialog = document.createElement("div")
-    dialog.className = "modal-dialog"
-    
-    const content = document.createElement("div")
-    content.className = "modal-content"
-
-    const header = document.createElement("div")
-    header.className = "modal-header"
-
-    const title = document.createElement("h5")
-    title.className = "modal-title"
-    title.innerText = "Alert"
-
-    const close = document.createElement("button")
-    close.type = "button"
-    close.className = "btn-close"
-    close.dataset.bsDismiss="modal"
-    close.ariaLabel = "Close"
-
-    const body = document.createElement("div")
-    body.className = "modal-body"
-
-    const bodytext = document.createElement("p")
-    bodytext.innerText = text
-    
-    modal.append(dialog)
-    dialog.append(content)
-    content.append(header, body)
-    header.append(title, close)
-    body.append(bodytext)
-
-    return modal
-}
-
 function updateScore(tr){
     const icon = tr.children[1].children[0]
     const inputgroup = tr.children[2].children[0].children
@@ -345,5 +204,4 @@ function updateScore(tr){
     icon.className = ((score==6) ? "bi bi-trophy" : "bi bi-"+score+"-circle")
 }
 
-renderBody()
-renderTableContent()
+loadPage()
